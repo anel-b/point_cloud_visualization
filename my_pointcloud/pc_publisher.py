@@ -41,8 +41,8 @@ class PointCloudPublisher(Node):
 
     def remove_background(self, point_cloud: o3d.geometry.PointCloud):
         # Crop point cloud to workspace
-        min_bound = np.array([-0.3, -1.2, -0.1])
-        max_bound = np.array([1.2, 1.2, 1.2])
+        min_bound = np.array([-0.4, -0.9, -0.03])
+        max_bound = np.array([1.2, 0.9, 1.4])
         bbox = o3d.geometry.AxisAlignedBoundingBox(min_bound=min_bound, max_bound=max_bound)
         point_cloud = point_cloud.crop(bbox)
 
