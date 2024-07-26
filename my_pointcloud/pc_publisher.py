@@ -13,13 +13,13 @@ class PointCloudPublisher(Node):
         super().__init__('point_cloud_publisher')
         self.publisher_point_cloud = self.create_publisher(PointCloud2, 'point_cloud_topic', 1)
 
-        # Homogeneous transformation matrix from robot base frame (R) to chessboard frame (B)
+        # Homogeneous transformation matrix from robot base frame (R) to checkerboard frame (B)
         R_T_RB = np.array([[-1.000,  0.000,  0.000,  0.358],
                            [ 0.000,  1.000,  0.000,  0.030],
                            [ 0.000,  0.000, -1.000,  0.006],
                            [ 0.000,  0.000,  0.000,  1.000]])
 
-        # Homogeneous transformation matrix from chessboard frame (B) to camera frame (C)
+        # Homogeneous transformation matrix from checkerboard frame (B) to camera frame (C)
         B_T_BC = np.array([[ 0.5357,  0.5685, -0.6244,  0.5918],
                            [-0.8444,  0.3671, -0.3902,  0.6178],
                            [ 0.0074,  0.7363,  0.6767, -0.9096],
