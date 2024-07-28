@@ -39,8 +39,8 @@ class PointCloudPublisher(Node):
         self.files = sorted(glob.glob(os.path.join(self.path, '*.ply')))
         self.index = 0
 
-        # Timer for publishing point cloud data every 0.03 seconds
-        self.timer = self.create_timer(0.03, self.publish_point_cloud)
+        # Timer for publishing point cloud data every 0.017 seconds
+        self.timer = self.create_timer(0.017, self.publish_point_cloud)
 
     def remove_background(self, point_cloud: o3d.geometry.PointCloud):
         # Crop point cloud to workspace
