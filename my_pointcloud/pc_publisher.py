@@ -13,6 +13,11 @@ class PointCloudPublisher(Node):
         super().__init__('point_cloud_publisher')
         self.publisher_point_cloud = self.create_publisher(PointCloud2, 'point_cloud_topic', 1)
 
+        # Get all .ply files from path
+        self.path = '/home/<username>/path/folder'
+        self.files = sorted(glob.glob(os.path.join(self.path, '*.ply')))
+        self.index = 0
+
         # Homogeneous transformation matrix from robot base frame (R) to checkerboard frame (B)
         R_T_RB = np.array([[-1.000,  0.000,  0.000,  0.358],
                            [ 0.000,  1.000,  0.000,  0.030],
@@ -33,11 +38,6 @@ class PointCloudPublisher(Node):
 
         # Homogeneous transformation matrix from robot base frame (R) to camera frame (C)
         self.R_T_RC = R_T_RB @ B_T_BC @ C_T_CC
-
-        # Get all .ply files from path
-        self.path = '/home/<username>/path/folder'
-        self.files = sorted(glob.glob(os.path.join(self.path, '*.ply')))
-        self.index = 0
 
         # Timer for publishing point cloud data every 0.017 seconds
         self.timer = self.create_timer(0.017, self.publish_point_cloud)
