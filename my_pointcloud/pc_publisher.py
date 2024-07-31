@@ -58,7 +58,7 @@ class PointCloudPublisher(Node):
         point_cloud = o3d.io.read_point_cloud(file)
 
         # Point cloud preprocessing
-        point_cloud = point_cloud.uniform_down_sample(every_k_points=20)
+        point_cloud = point_cloud.voxel_down_sample(voxel_size=0.03)
         point_cloud = point_cloud.transform(self.R_T_RC)
         point_cloud = self.remove_background(point_cloud)
 
