@@ -1,7 +1,9 @@
-# Point cloud visualization package in ROS 2 Humble with Open3D library
+# Point Cloud Visualization Package in ROS 2 Humble with Open3D
 
-### Containment of "my_pointcloud" package:
+### Package Contents of `my_pointcloud`:
 
-**2 Nodes:**
-- pc_publisher.py<br>(reads point cloud and publishes it)
-- pc_subscriber.py<br>(subscribes to point cloud and visualizes it with Open3D)
+**Nodes:**
+1. **`pc_publisher.py`**  
+   - **Description**: Reads point cloud data from .ply file and publishes it to the "point_cloud_topic" ROS 2 topic.
+2. **`pc_subscriber.py`**  
+   - **Description**: Subscribes to the "point_cloud_topic" ROS 2 topic and visualizes it using Open3D library.
