@@ -18,26 +18,26 @@ class PointCloudPublisher(Node):
         self.files = sorted(glob.glob(os.path.join(self.path, '*.ply')))
         self.index = 0
 
-        # Homogeneous transformation matrix from robot base frame (R) to checkerboard frame (B)
-        R_T_RB = np.array([[-1.000,  0.000,  0.000,  0.358],
-                           [ 0.000,  1.000,  0.000,  0.030],
-                           [ 0.000,  0.000, -1.000,  0.006],
-                           [ 0.000,  0.000,  0.000,  1.000]])
+        # Homogeneous transformation matrix from robot base frame R to checkerboard frame B
+        T_RB = np.array([[-1.000,  0.000,  0.000,  0.358],
+                         [ 0.000,  1.000,  0.000,  0.030],
+                         [ 0.000,  0.000, -1.000,  0.006],
+                         [ 0.000,  0.000,  0.000,  1.000]])
 
-        # Homogeneous transformation matrix from checkerboard frame (B) to camera frame (C)
-        B_T_BC = np.array([[ 0.5357,  0.5685, -0.6244,  0.5918],
-                           [-0.8444,  0.3671, -0.3902,  0.6178],
-                           [ 0.0074,  0.7363,  0.6767, -0.9096],
-                           [ 0.0000,  0.0000,  0.0000,  1.0000]])
+        # Homogeneous transformation matrix from checkerboard frame B to camera frame C
+        T_BC = np.array([[ 0.5357,  0.5685, -0.6244,  0.5918],
+                         [-0.8444,  0.3671, -0.3902,  0.6178],
+                         [ 0.0074,  0.7363,  0.6767, -0.9096],
+                         [ 0.0000,  0.0000,  0.0000,  1.0000]])
 
         # Homogeneous transformation matrix for correcting camera orientation and position
-        C_T_CC = np.array([[ 1.000,  0.000,  0.000,  0.140],
-                           [ 0.000, -1.000,  0.000,  0.040],
-                           [ 0.000,  0.000, -1.000, -0.040],
-                           [ 0.000,  0.000,  0.000,  1.000]])
+        T_CC = np.array([[ 1.000,  0.000,  0.000,  0.140],
+                         [ 0.000, -1.000,  0.000,  0.040],
+                         [ 0.000,  0.000, -1.000, -0.040],
+                         [ 0.000,  0.000,  0.000,  1.000]])
 
-        # Homogeneous transformation matrix from robot base frame (R) to camera frame (C)
-        self.R_T_RC = R_T_RB @ B_T_BC @ C_T_CC
+        # Homogeneous transformation matrix from robot base frame R to camera frame C
+        self.T_RC = T_RB @ T_BC @ T_CC
 
         # Timer for publishing point cloud data every 0.017 seconds
         self.timer = self.create_timer(0.017, self.publish_point_cloud)
@@ -59,7 +59,7 @@ class PointCloudPublisher(Node):
 
         # Point cloud preprocessing
         point_cloud = point_cloud.voxel_down_sample(voxel_size=0.03)
-        point_cloud = point_cloud.transform(self.R_T_RC)
+        point_cloud = point_cloud.transform(self.T_RC)
         point_cloud = self.remove_background(point_cloud)
 
         # Save XYZ and RGB values into numpy arrays
