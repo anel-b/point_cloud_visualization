@@ -24,6 +24,9 @@ class PointCloudPublisher(Node):
                          [ 0.000,  0.000, -1.000,  0.006],
                          [ 0.000,  0.000,  0.000,  1.000]])
 
+        # Homogeneous transformation matrix from checkerboard frame B to robot base frame R
+        T_RB = np.linalg.inv(T_BR)
+
         # Homogeneous transformation matrix from camera frame C to checkerboard frame B
         T_BC = np.array([[ 0.5357,  0.5685, -0.6244,  0.5918],
                          [-0.8444,  0.3671, -0.3902,  0.6178],
@@ -37,7 +40,7 @@ class PointCloudPublisher(Node):
                          [ 0.000,  0.000,  0.000,  1.000]])
 
         # Homogeneous transformation matrix from camera frame C to robot base frame R
-        self.T_RC = np.linalg.inv(T_BR) @ T_BC @ T_CC
+        self.T_RC = T_RB @ T_BC @ T_CC
 
         # Timer for publishing point cloud data every 0.017 seconds
         self.timer = self.create_timer(0.017, self.publish_point_cloud)
