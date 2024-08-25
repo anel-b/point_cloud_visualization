@@ -1,6 +1,5 @@
 {
     "python.autoComplete.extraPaths": [
-        "/home/anyba/franka_ros2_ws/install/repulsive_force_computation/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/repulsive_force/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/my_pointcloud/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/messages_fr3/local/lib/python3.10/dist-packages",
@@ -14,7 +13,6 @@
         "/opt/ros/humble/local/lib/python3.10/dist-packages"
     ],
     "python.analysis.extraPaths": [
-        "/home/anyba/franka_ros2_ws/install/repulsive_force_computation/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/repulsive_force/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/my_pointcloud/lib/python3.10/site-packages",
         "/home/anyba/franka_ros2_ws/install/messages_fr3/local/lib/python3.10/dist-packages",

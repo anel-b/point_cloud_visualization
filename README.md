@@ -1,6 +1,6 @@
 # Point Cloud Visualization Package in ROS 2 Humble with Open3D
 
-### Package Contents of 'my_pointcloud':
+### Package Contents of `point_cloud_visualization`:
 
 **2 Nodes:**
 * **pc_publisher.py**  

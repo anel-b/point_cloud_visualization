@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'my_pointcloud'
+package_name = 'point_cloud_visualization'
 
 setup(
     name=package_name,
@@ -20,8 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "pc_publisher = my_pointcloud.pc_publisher:main",
-            "pc_subscriber = my_pointcloud.pc_subscriber:main"
+            "pc_publisher = point_cloud_visualization.pc_publisher:main",
+            "pc_subscriber = point_cloud_visualization.pc_subscriber:main"
         ],
     },
 )
